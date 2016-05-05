@@ -29,9 +29,9 @@ eggs = PyPDF
 # Odoo configuration
 #
 # Since v8 most data (eg. ir_attachments) are stored on the file system in a 
-#  directory identified by the data-dir parameter. We set it to an odoo8_data_dir
-# folder at the project root directory.
-options.data_dir = ../../odoo9_data_dir
+# directory identified by the data-dir parameter. 
+# Here you can set it's location:
+#options.data_dir = ../../odoo_data_dir
 
 #
 #   Configuration de gunicorn
