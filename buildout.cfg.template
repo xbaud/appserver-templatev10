@@ -16,7 +16,8 @@ recipe = anybox.recipe.openerp:server
 #version = nightly 8.0 latest
 #
 #version = url http://nightly.odoo.com/9.0/nightly/src/odoo_9.0c.latest.tar.gz
-version = git https://github.com/odoo/odoo.git odoo 9.0
+#version = git https://github.com/odoo/odoo.git odoo master depth=5
+version = git https://github.com/odoo/odoo.git odoo master
 
 addons = 	local ./project_addons/
 # Examples
@@ -118,13 +119,13 @@ sections = services
 logfile_openerp = ${buildout:directory}/var/log/odoo-stdout.log
 
 # User owner of preocesses (supervisor default is to run as root which is impossible for odoo)
-process_owner_user = admv9
+process_owner_user = admv10
 
 # number of workers for multi process programs
 openerp_workers = 2
 
 # Note: Last one is for
 programs =
-    10 v9_odoo_mono (autostart=false) "${buildout:directory}/bin/start_openerp" [ --logfile "${:logfile_openerp}" --workers=0 ] ${buildout:directory} true ${:process_owner_user}
-    10 v9_odoo_multi "${buildout:directory}/bin/start_openerp" [ --logfile "${:logfile_openerp}" --workers=${:openerp_workers}] ${buildout:directory} true ${:process_owner_user}
+    10 v10_odoo_mono (autostart=false) "${buildout:directory}/bin/start_openerp" [ --logfile "${:logfile_openerp}" --workers=0 ] ${buildout:directory} true ${:process_owner_user}
+    10 v10_odoo_multi "${buildout:directory}/bin/start_openerp" [ --logfile "${:logfile_openerp}" --workers=${:openerp_workers}] ${buildout:directory} true ${:process_owner_user}
    

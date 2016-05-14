@@ -24,7 +24,9 @@ function install_openerp {
         echo "So you must either use bin/buildout to update or launch \"install.sh reset\" to remove all buildout installed items."
         exit -1
     fi
-    wget https://raw.github.com/buildout/buildout/master/bootstrap/bootstrap.py
+    if [ ! -f bootstrap.py ]; then    
+        wget https://raw.github.com/buildout/buildout/master/bootstrap/bootstrap.py
+    fi
     virtualenv py27
     py27/bin/python bootstrap.py
     py27/bin/pip install $PYPI_INDEX --allow-all-external --allow-unverified bzr bzr==2.6.0
