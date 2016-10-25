@@ -69,8 +69,10 @@ function setup_c9_trusty_blank_container {
     sudo apt-get install -y libsasl2-dev python-dev libldap2-dev libssl-dev
     sudo apt-get install -y postgresql
     sudo pg_dropcluster 9.3 main
-    sudo pg_createcluster --locale pt_BR.UTF-8 9.3 main
-
+    sudo pg_createcluster --locale fr_FR.UTF-8 9.3 main
+    sudo pg_ctlcluster 9.3 main start
+    sudo su - postgres -c "psql -c \"CREATE ROLE ubuntu WITH LOGIN SUPERUSER CREATEDB CREATEROLE PASSWORD 'ubuntu';\"" 
+    
     # Install recent setuptools
     wget https://bootstrap.pypa.io/ez_setup.py
     sudo python ez_setup.py
@@ -78,9 +80,6 @@ function setup_c9_trusty_blank_container {
     
     # Install recent virtualenv
     sudo easy_install virtualenv
-    
-    # 
-    
 }
 
 
