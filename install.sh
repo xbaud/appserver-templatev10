@@ -50,6 +50,40 @@ function remove_buildout_files {
     echo "    Done."
 }
 
+function setup_c9_trusty_blank_container {
+    
+    # Set a UTF8 locale
+    sudo locale-gen fr_FR fr_FR.UTF-8
+    sudo update-locale    
+    
+    # Update bashrc with locale
+    echo "#"
+    echo "# Added by appserver-templatev10 install.sh"
+    echo "export LANG=fr_FR.UTF-8" >> /home/ubuntu/.bashrc
+    echo "export LANGUAGE=fr_FR" >> /home/ubuntu/.bashrc
+    echo "export LC_ALL=fr_FR.UTF-8" >> /home/ubuntu/.bashrc
+    echo "export LC_CTYPE=fr_FR.UTF-8" >> /home/ubuntu/.bashrc
+
+    # Refresh index and install required index
+    sudo apt-get update
+    sudo apt-get install -y libsasl2-dev python-dev libldap2-dev libssl-dev
+    sudo apt-get install -y postgresql
+    sudo pg_dropcluster 9.3 main
+    sudo pg_createcluster --locale pt_BR.UTF-8 9.3 main
+
+    # Install recent setuptools
+    wget https://bootstrap.pypa.io/ez_setup.py
+    sudo python ez_setup.py
+    rm ez_setup.py
+    
+    # Install recent virtualenv
+    sudo easy_install virtualenv
+    
+    # 
+    
+}
+
+
 
 #
 # Process command line options
@@ -87,6 +121,7 @@ if [[ $COMMAND == "help"  ||  $HELP == 1 ]]; then
     echo "Available commands:"
     echo "  ./install.sh help                Prints this message."
     echo "  ./install.sh [-i ...] openerp    Install OpenERP using buildout (postgresql and prerequisites must"
+    echo "  ./install.sh c9-trusty-setup     Install Prerequisites on c9 Ubuntu 14 blank container"
     echo "  ./install.sh reset               Remove all buildout installed files."
     echo 
     echo "Available options:"
@@ -101,6 +136,9 @@ if [[ $COMMAND == "reset" ]]; then
     exit
 elif [[ $COMMAND == "openerp" ]]; then
     install_openerp
+    exit
+elif [[ $COMMAND == "c9-trusty-setup" ]]; then
+    setup_c9_trusty_blank_container
     exit
 fi
 
