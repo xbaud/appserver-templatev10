@@ -19,7 +19,8 @@ odoo8_data_dir/
 # For Audaxis addons structure
 /**/funkload/log/
 
-
+# For buildout development
+a.r.odoo/
 
 # project specific
 
