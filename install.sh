@@ -80,8 +80,22 @@ function setup_c9_trusty_blank_container {
     
     # Install recent virtualenv
     sudo easy_install virtualenv
-}
+    
+    # create a basic buildout.cfg
+    cat <<EOT >> buildout.cfg
+[buildout]
+extends = appserver.cfg
+#          ../../../inouk.edofx
 
+[openerp]
+options.admin_passwd = admin
+options.db_user = ubuntu
+options.db_password = ubuntu
+options.db_host = 127.0.0.1
+options.xmlrpc_port = 8080    
+EOT
+
+}
 
 
 #
