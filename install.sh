@@ -77,6 +77,7 @@ function setup_c9_trusty_blank_container {
     wget https://bootstrap.pypa.io/ez_setup.py
     sudo python ez_setup.py
     rm ez_setup.py
+    sudo rm setuptools-*.zip 
     
     # Install recent virtualenv
     sudo easy_install virtualenv
