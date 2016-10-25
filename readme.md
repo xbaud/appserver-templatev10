@@ -1,8 +1,8 @@
-# appserver-templatev9
+# appserver-templatev10
 
-This repository is configured to build an Odoo 9 appserver using buildout and the anybox.recipe.odoo.
-
-This repository is best used with ikez (http://github.com/cmorisse/ikez)
+This repository is configured to build an Odoo 10 appserver using buildout and the anybox.recipe.odoo.
 
 # Licence
-All files in this repository are Licensed under the LGPL Licence.
+
+Files in this repository are Licensed under the LGPL and A-GPL Licence.
+
