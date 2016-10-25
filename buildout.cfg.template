@@ -1,8 +1,11 @@
 [buildout]
 parts = openerp supervisor
-
 versions = versions
 find-links = http://download.gna.org/pychart/
+
+extensions = gp.vcsdevelop
+vcs-extend-develop = git+https://github.com/archetipo/anybox.recipe.odoo@fix_for_odoo10#egg=a.r.odoo
+vcs-update = True
 
 [openerp]
 recipe = anybox.recipe.odoo:server

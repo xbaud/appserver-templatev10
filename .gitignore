@@ -21,6 +21,6 @@ odoo8_data_dir/
 
 # For buildout development
 a.r.odoo/
-
+setuptools-*.zip
 # project specific
 
