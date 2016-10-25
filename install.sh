@@ -72,6 +72,7 @@ function setup_c9_trusty_blank_container {
     sudo pg_createcluster --locale fr_FR.UTF-8 9.3 main
     sudo pg_ctlcluster 9.3 main start
     sudo su - postgres -c "psql -c \"CREATE ROLE ubuntu WITH LOGIN SUPERUSER CREATEDB CREATEROLE PASSWORD 'ubuntu';\"" 
+    sudo su - postgres -c "psql -c \"CREATE DATABASE ubuntu;\"" 
     
     # Install recent setuptools
     wget https://bootstrap.pypa.io/ez_setup.py
