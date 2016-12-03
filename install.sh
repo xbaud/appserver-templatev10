@@ -261,7 +261,7 @@ if [[ $COMMAND == "help"  ||  $HELP == 1 ]]; then
     echo "  ./install.sh help              Prints this message."
     echo "  ./install.sh [-i ...] openerp  Install OpenERP using buildout (prerequisites must be installed)."
     echo "  ./install.sh dependencies      Install dependencies specific to this server."
-    echo "  ./install.sh c9-trusty         Install Prerequisites on a Cloud9 Ubuntu 14 blank container."
+    echo "  ./install.sh c9_trusty         Install Prerequisites on a Cloud9 Ubuntu 14 blank container."
     echo "  ./install.sh xenial            Install Prerequisites on a fresh Ubuntu Xenial."
     echo "  ./install.sh reset             Remove all buildout installed files."
     echo 
@@ -278,7 +278,7 @@ if [[ $COMMAND == "reset" ]]; then
 elif [[ $COMMAND == "openerp" ]]; then
     install_openerp
     exit
-elif [[ $COMMAND == "c9-trusty" ]]; then
+elif [[ $COMMAND == "c9_trusty" ]]; then
     setup_c9_trusty_blank_container
     exit
 elif [[ $COMMAND == "xenial" ]]; then
