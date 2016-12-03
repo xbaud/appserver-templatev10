@@ -194,8 +194,8 @@ EOT
 #
 function install_dependencies {
 
-    if [-f install_dependencies.sh ]; then    
-        ./install_dependencies.sh
+    if [ -f install_dependencies.sh ]; then    
+        sh install_dependencies.sh
     else
         echo "No project specific 'install_dependencies.sh' script found."
     fi
