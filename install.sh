@@ -190,31 +190,15 @@ EOT
 }
 
 #
-# install xy required dependencies
+# install project required dependencies
 #
 function install_dependencies {
-    
-    # Install Poppler utils (used for text extraction from PDF)
-    echo "Installing Poppler Utils (from source)"
-    wget https://poppler.freedesktop.org/poppler-0.48.0.tar.xz
-    tar -xf poppler-0.48.0.tar.xz
-    cd poppler-0.48.0
-    ./configure
-    make
-    make check
-    sudo make install
-    sudo ldconfig
-    cd ..
-    rm poppler-0.48.0.tar.xz
-    rm -rf poppler-0.48.0
 
-    # Install tesseract OCR
-    echo "Installing Tesseract-OCR (from distribution)"
-    sudo apt install -y tesseract-ocr tesseract-ocr-fra
-    
-    #  Install Magicwand
-    echo "Installing Magicwand (from distribution)"
-    sudo apt install -y libmagickwand-dev
+    if [-f install_dependencies.sh ]; then    
+        ./install_dependencies.sh
+    else
+        echo "No project specific 'install_dependencies.sh' script found."
+    fi
 }
 
 
