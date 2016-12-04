@@ -194,10 +194,10 @@ EOT
 #
 function install_dependencies {
 
-    if [ -f install_dependencies.sh ]; then    
-        sh install_dependencies.sh
+    if [ -f install-dependencies.sh ]; then    
+        sh install-dependencies.sh
     else
-        echo "No project specific 'install_dependencies.sh' script found."
+        echo "No project specific 'install-dependencies.sh' script found."
     fi
 }
 
@@ -206,21 +206,7 @@ function install_dependencies {
 # Placeholder function used to debug snippets
 #
 function debug_function {
-    
-
-    # Update LD_LIBRARY_PATH on Cloud 9
-    if grep -Fxq "# Added by Xy dependencies Installer" /home/$USER/.profile
-    then
-        echo "Skipping /home/$USER/.profile update"
-    else
-        cat >> /home/$USER/.profile <<'EOT'
-
-# Added by Xy dependencies Installer
-export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
-
-EOT
-    fi
-    
+    echo "This is a dummy function used to debug snippets"
 }
 
 
@@ -278,7 +264,7 @@ if [[ $COMMAND == "reset" ]]; then
 elif [[ $COMMAND == "openerp" ]]; then
     install_openerp
     exit
-elif [[ $COMMAND == "c9_trusty" ]]; then
+elif [[ $COMMAND == "c9-trusty" ]]; then
     setup_c9_trusty_blank_container
     exit
 elif [[ $COMMAND == "xenial" ]]; then
