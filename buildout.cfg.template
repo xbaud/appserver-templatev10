@@ -26,6 +26,8 @@ addons = 	local ./project_addons/
 # Examples
 #			 git git@bitbucket.org:cmorisse/inouk_openerp_data_migration_toolkit.git parts/inouk_openerp_data_migration_toolkit master
 #            git https://github.com/OCA/connector.git parts/oca_connector 8.0
+# Uncomment and move up for Odoo Enterprise
+#            git git@github.com:odoo/enterprise.git  parts/enterprise 10.0
 
 eggs = PyPDF
 
