@@ -20,7 +20,7 @@ recipe = anybox.recipe.odoo:server
 #
 #version = url http://nightly.odoo.com/9.0/nightly/src/odoo_9.0c.latest.tar.gz
 #version = git https://github.com/odoo/odoo.git odoo master depth=5
-version = git https://github.com/odoo/odoo.git odoo 10.0
+version = git https://github.com/odoo/odoo.git odoo 10.0 depth=5
 
 addons = 	local ./project_addons/
 # Examples
@@ -79,7 +79,7 @@ psycogreen=1.0
 psycopg2=2.6.2
 pyPdf=1.13
 pydot=1.2.3
-pyparsing=2.1.10
+pyparsing=2.2
 pyserial=3.1.1
 python-dateutil=2.5.3
 python-ldap=2.4.27
