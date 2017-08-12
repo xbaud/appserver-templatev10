@@ -6,6 +6,8 @@ BUILDOUT_INDEX=""
 
 HELP=0
 
+RUNNING_ON=$(uname) 
+
 #
 # We need bash
 #
@@ -28,9 +30,16 @@ function install_openerp {
         wget https://raw.github.com/buildout/buildout/master/bootstrap/bootstrap.py
     fi
     virtualenv py27
+    py27/bin/pip install setuptools
     py27/bin/python bootstrap.py
     py27/bin/pip install $PYPI_INDEX bzr==2.7.0
-    py27/bin/pip install $PYPI_INDEX cython==0.25.1
+    py27/bin/pip install $PYPI_INDEX cython==0.26
+    py27/bin/pip install $PYPI_INDEX pyusb==1.0.0
+    
+    if [ $RUNNING_ON==Darwin ]; then
+        echo "Running on Darwin."
+        py27/bin/pip install python-ldap==2.4.27 --global-option=build_ext --global-option="-I$(xcrun --show-sdk-path)/usr/include/sasl"
+    fi    
     bin/buildout install
     echo
     echo "Your commands are now available in ./bin"
@@ -40,14 +49,15 @@ function install_openerp {
 
 function remove_buildout_files {
     echo "Removing all buidout generated items..."
-    echo "    Not removing downloads/ to avoid re-downloading openerp"
+    echo "    Not removing downloads/ and eggs/ for performance reason."
     rm -rf .installed.cfg
     rm -rf bin/
     rm -rf develop-eggs/
-    rm -rf eggs/
+    rm -rf develop-src/
     rm -rf etc/
     rm -rf py27/
     rm -rf bootstrap.py
+    #rm -rf eggs/
     echo "    Done."
 }
 
@@ -137,8 +147,7 @@ EOT
     # Refresh index and install required index
     sudo apt-get update
     sudo apt-get install -y libsasl2-dev python-dev libldap2-dev libssl-dev
-    
-
+ 
     sudo apt install -y libz-dev gcc
     sudo apt install -y libxml2-dev libxslt1-dev
     sudo apt install -y libpq-dev
@@ -178,12 +187,11 @@ EOT
     fi
 
     # Install Odoo 9 dependencies
-    # sudo apt-get install -y nodejs npm => Already installed as a c9 prerequisites
     sudo apt install -y nodejs npm
     sudo ln -fs /usr/bin/nodejs /usr/bin/node    
     sudo npm install -g less less-plugin-clean-css
     sudo ln -fs /usr/local/bin/lessc /usr/bin/lessc
-    sudo wget http://download.gna.org/wkhtmltopdf/0.12/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
+    sudo wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
     sudo apt-get install -y fontconfig libxrender1 libjpeg-turbo8
     sudo dpkg -i wkhtmltox-0.12.1_linux-trusty-amd64.deb
     sudo rm wkhtmltox-0.12.1_linux-trusty-amd64.deb
@@ -193,11 +201,11 @@ EOT
 # install project required dependencies
 #
 function install_dependencies {
-
-    if [ -f install-dependencies.sh ]; then    
-        sh install-dependencies.sh
+    ls
+    if [ -f install_dependencies.sh ]; then    
+        sh install_dependencies.sh
     else
-        echo "No project specific 'install-dependencies.sh' script found."
+        echo "No project specific 'install_dependencies.sh' script found."
     fi
 }
 
@@ -206,7 +214,11 @@ function install_dependencies {
 # Placeholder function used to debug snippets
 #
 function debug_function {
-    echo "This is a dummy function used to debug snippets"
+    
+    if [ $RUNNING_ON==Darwin ]; then
+        echo "Running on Darwin."
+    fi    
+
 }
 
 
@@ -245,10 +257,10 @@ echo "(c) 2013, 2014, 2015, 2016 @cmorisse"
 if [[ $COMMAND == "help"  ||  $HELP == 1 ]]; then
     echo "Available commands:"
     echo "  ./install.sh help              Prints this message."
+    echo "  ./install.sh [-i ...] openerp  Install OpenERP using buildout (prerequisites must be installed)."
+    echo "  ./install.sh dependencies      Install dependencies specific to this server."
     echo "  ./install.sh c9-trusty         Install Prerequisites on a Cloud9 Ubuntu 14 blank container."
     echo "  ./install.sh xenial            Install Prerequisites on a fresh Ubuntu Xenial."
-    echo "  ./install.sh dependencies      Install dependencies specific to this server."
-    echo "  ./install.sh [-i ...] openerp  Install OpenERP using buildout (prerequisites must be installed)."
     echo "  ./install.sh reset             Remove all buildout installed files."
     echo 
     echo "Available options:"
