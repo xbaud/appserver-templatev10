@@ -1,7 +1,7 @@
 [buildout]
 parts = openerp supervisor
 versions = versions
-find-links = http://download.gna.org/pychart/
+find-links =
 
 extensions = gp.vcsdevelop
 develop-dir = ./develop-src
