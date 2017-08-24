@@ -25,6 +25,7 @@
     # always loaded
     'data': [
         'views/product_template.xml',
+        'views/subscription.xml',
     ],
     
     # only loaded in demonstration mode

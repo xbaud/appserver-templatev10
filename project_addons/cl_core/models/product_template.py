@@ -4,9 +4,6 @@ from odoo import api, fields, models, tools, _
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
     
-    type = fields.Selection([('consu', _('Consumable')),
-                             ('service', _('Service')), 
-                             ('subsc', _("Subscription"))])
     cl_delay = fields.Integer(_("Delay"))
     cl_delay_unit = fields.Selection([('day', _("Day")),
                                    ('month', _("Month")),
@@ -19,9 +16,10 @@ class ProductTemplate(models.Model):
                                           ('year', _("Year"))],
                                           _("Cancellation unit"))
 
-    #def __init__(self, cr, uid, context=None):
-    #   super(ProductTemplate, self).__init__(cr, uid)
-    #   newOption = ('subsc', _("Subscription"))
-    #   typeSelection = self._columns['type'].selection
-    #   if newOption not in typeSelection:
-    #   typeSelection.append(newOption)
+    def init(self):
+       super(ProductTemplate, self).init()
+       newOption = ('subsc', _("Subscription"))
+       if 'type' in self._fields:
+            typeSelection = self._fields['type'].selection
+            if newOption not in typeSelection:
+               typeSelection.append(newOption)

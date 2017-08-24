@@ -2,4 +2,4 @@
 
 import product_template
 import subscription
-import account_invoice
+import sale
